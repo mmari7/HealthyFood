@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    {% block head %}{% endblock %}
+    <title>my_app</title>
+</head>
+    <body>
+    <nav class="navbar">
+        <div>
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <img class="logo" src="/static/media/logo.png" alt="salad">
+      </a>
+        <a class="navbar-brand" style="color: #006400; font-size: 2.2rem;" href="/"><b>HealthyFood</b></a>
+            </div>
+        <a class="navbar-item" style="color: #006400; font-size: 1.2rem; text-decoration: none;" href="/recipes"><b>Рецепты</b></a>
+        {% if current_user.is_authenticated %}
+         <a class='navbar-item' style="color: #006400; font-size: 1.2rem; text-decoration: none;" href="/fav_recipes"><b>Избранное</b></a>
+            <a class="navbar-item" style="color: #006400; font-size: 1.2rem; text-decoration: none;" href="/logout"><b>{{ current_user.name }}</b></a>
+        {% else %}
+            <p>
+                <a class="btn btn-outline-success" href="/register">Регистрация</a>
+                <a class="btn btn-success" href="/login">Вход</a>
+                </p>
+        {% endif %}
+    </nav>
+    <!-- Begin page content -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+  <div class="footer"><footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-body-secondary">© Ты - то, что ты ешь</p>
+
+    <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none" >
+          <img class="logo" src="/static/media/logo.png" alt="salad">
+      </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+        <li><a href="https://t.me/mma_87" target="_blank">
+          <img src="/static/media/tg.png">
+      </a></li>
+    </ul>
+
+  </footer></div>
+    </body>
+</html>

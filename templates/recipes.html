@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+
+<!--в сетку по три карточки в ряд-->
+{% block content %}
+<h1 align="center" style="margin-top: 30px; margin-bottom: 30px; font-family: 'arial black';">{{ hat }}</h1>
+<form class="login_form" method="post" enctype="multipart/form-data" style="position: sticky; background-color: #eeee;">
+  <div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn" type="button">Категории</button>
+  <div id="myDropdown" class="dropdown-content">
+    <input type="text" placeholder="Поиск.." id="myInput" onkeyup="filterFunction()">
+    {% for cat in categories %}
+      <li><input type="checkbox" id="{{ cat }}" name="{{ cat }}">
+        <label for="{{ cat }}">{{ cat }}</label>
+      </li>
+    {% endfor %}
+  </div>
+  </div>
+
+  <script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("li");
+  for (i = 0; i < a.length; i++) {
+    txtЗначение = a[i].textСодержание || a[i].innerText;
+    if (txtЗначение.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+</script>
+  <input class="time" id="min_time" placeholder="время от:" type="number" name="min_time">
+  <input class="time" id="max_time" placeholder="время до:" type="number" name="max_time">
+  <button type="submit" class="btn btn-success">Показать рецепты</button>
+</form>
+
+<label>{{ message }}</label>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for recipe in recipes %}
+        <div class="col">
+          <div class="card" style="width: 18rem; margin-bottom: 30px; height: 500px">
+  <img src="/static/media/{{ recipe.photos.split(', ')[-1] }}" class="card-img-top" alt="Картнка">
+  <div class="card-body">
+    <h5 class="card-title">{{ recipe.name }}</h5>
+    <p class="card-text">Время приготовления: {{ recipe.time }} минут</p>
+    <p class="card-text">Порций: {{ recipe.portions }}</p>
+    <a href="/recipe/{{ recipe.id }}" class="card-link" style="margin-bottom: 10px; color: #006400">Перейти к рецепту</a>
+<!--    {% if current_user.is_authenticated %}-->
+<!--      <button type="button" class="btn btn-danger">Добавить</button>-->
+<!--    {% endif %}-->
+  </div>
+</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
