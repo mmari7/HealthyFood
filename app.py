@@ -7,7 +7,6 @@ from data.recipes import Recipe
 from data.users import User
 from data.relations import Relation
 import os
-
 file_path = os.path.abspath(os.getcwd())+"food.db"
 
 app = Flask(__name__)
