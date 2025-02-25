@@ -6,10 +6,13 @@ from forms.user import LoginForm
 from data.recipes import Recipe
 from data.users import User
 from data.relations import Relation
+import os
+
+file_path = os.path.abspath(os.getcwd())+"food.db"
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'bmk8c9ug@)@)o+32--lsa+3mgc+(zn*wgzhsp3e7u$a6x+c35&'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/food.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+file_path
 login_manager = LoginManager()
 login_manager.init_app(app)
 db_session.global_init("db/food.db")
