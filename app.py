@@ -170,5 +170,5 @@ def show_favourite_recipes():
                                message='К сожалению, рецепты не найдены', hat=hat)
 
 
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run()
